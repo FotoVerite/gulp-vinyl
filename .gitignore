@@ -42,6 +42,7 @@ typings/
 # Optional npm cache directory
 .npm
 
+
 # Optional eslint cache
 .eslintcache
 
@@ -65,3 +66,4 @@ typings/
 
 # Test results
 test.xunit
+test/lcov.info
