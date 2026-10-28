@@ -113,7 +113,7 @@ function suite(moduleName) {
 
       it("defaults stat to null", function () {
         var file = new File();
-        assert.ok(!file.state);
+        assert.ok(!file.stat);
         assert.strictEqual(file.stat, null);
       });
 
