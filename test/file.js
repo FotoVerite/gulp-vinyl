@@ -914,11 +914,11 @@ function suite(moduleName) {
           cwd: "/foo",
           base: "/bar",
         });
-        assert.notEqual(file.base, file.cwd);
+        assert.notStrictEqual(file.base, file.cwd);
         file.base = null;
         assert.strictEqual(file.base, file.cwd);
         file.base = "/bar/";
-        assert.notEqual(file.base, file.cwd);
+        assert.notStrictEqual(file.base, file.cwd);
         file.base = undefined;
         assert.strictEqual(file.base, file.cwd);
       });
