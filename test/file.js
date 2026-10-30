@@ -102,7 +102,6 @@ function suite(moduleName) {
 
       it("defaults path to null", function () {
         var file = new File();
-        assert.ok(!file.path);
         assert.strictEqual(file.path, null);
       });
 
@@ -113,13 +112,11 @@ function suite(moduleName) {
 
       it("defaults stat to null", function () {
         var file = new File();
-        assert.ok(!file.stat);
         assert.strictEqual(file.stat, null);
       });
 
       it("defaults contents to null", function () {
         var file = new File();
-        assert.ok(!file.contents);
         assert.strictEqual(file.contents, null);
       });
     });
@@ -580,7 +577,7 @@ function suite(moduleName) {
         assert.strictEqual(file2.cwd, file.cwd);
         assert.strictEqual(file2.base, file.base);
         assert.strictEqual(file2.path, file.path);
-        assert.ok(!file2.contents);
+        assert.strictEqual(file2.contents, null);
       });
 
       it("properly clones the `stat` property", function () {
@@ -614,7 +611,7 @@ function suite(moduleName) {
 
         assert.strictEqual(copy.history[0], options.path);
         copy.path = "lol";
-        assert.notEqual(file.path, copy.path);
+        assert.notStrictEqual(file.path, copy.path);
       });
 
       it("copies custom properties", function () {
@@ -691,15 +688,15 @@ function suite(moduleName) {
         assert.notStrictEqual(file4.custom.meta, file.custom.meta);
 
         var file5 = file.clone(false);
-        assert.strictEqual(file5.custom, file.custom);
+        assert.deepStrictEqual(file5.custom, file.custom);
         assert.strictEqual(file5.custom, file.custom);
         assert.deepStrictEqual(file5.custom.meta, file.custom.meta);
         assert.strictEqual(file5.custom.meta, file.custom.meta);
 
         var file6 = file.clone({ deep: false });
+        assert.deepStrictEqual(file6.custom, file.custom);
         assert.strictEqual(file6.custom, file.custom);
-        assert.strictEqual(file6.custom, file.custom);
-        assert.strictEqual(file6.custom.meta, file.custom.meta);
+        assert.deepStrictEqual(file6.custom.meta, file.custom.meta);
         assert.strictEqual(file6.custom.meta, file.custom.meta);
       });
 
@@ -907,7 +904,7 @@ function suite(moduleName) {
           cwd: "/foo",
           base: "/bar",
         });
-        assert.notEqual(file.base, file.cwd);
+        assert.notStrictEqual(file.base, file.cwd);
         file.base = file.cwd;
         assert.strictEqual(file.base, file.cwd);
       });
@@ -1404,7 +1401,7 @@ function suite(moduleName) {
       it("throws on set with null path", function () {
         var file = new File();
 
-        assert.ok(!file.path);
+        assert.strictEqual(file.path, null);
         assert.deepStrictEqual(file.history, []);
 
         function invalid() {
